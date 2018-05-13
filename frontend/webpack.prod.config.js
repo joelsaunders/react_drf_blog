@@ -13,7 +13,7 @@ module.exports = Object.assign(config, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        BASE_API_URL: JSON.stringify('http://thebookofjoel.com/api/')
+        BASE_API_URL: JSON.stringify('http://167.99.83.61/api/')
       }
     }),
     new webpack.DefinePlugin({
