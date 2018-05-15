@@ -6,6 +6,16 @@ export const CURRENT_VIEW = 'CURRENT_VIEW';
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const FETCH_POST = 'FETCH_POST';
 
+
+function generateUrl(endpoint) {
+    if (API_URL === null) {
+        return `/api/${endpoint}/`;
+    } else {
+        return `${API_URL}${endpoint}/`;
+    }
+}
+
+
 export function selectView(view) {
     return {
         type: CURRENT_VIEW,
@@ -14,7 +24,7 @@ export function selectView(view) {
 }
 
 export function fetchPosts() {
-    const url = `${API_URL}posts/`;
+    const url = generateUrl('posts');
     const request = axios.get(url);
 
     return {
@@ -24,7 +34,8 @@ export function fetchPosts() {
 }
 
 export function fetchPost(postId) {
-    const request = axios.get(`${API_URL}posts/${postId}/`)
+    const url = generateUrl(`posts/${postId}`);
+    const request = axios.get(url);
 
     return {
         type: FETCH_POST,
