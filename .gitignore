@@ -17,3 +17,5 @@ circle_creds\.json
 
 app/main/local_settings.py
 app/static
+
+frontend/dist
