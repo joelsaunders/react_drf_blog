@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from blog import models
 
-models_list = [models.BlogPost]
 
-admin.site.register(models_list)
+@admin.register(models.BlogPost)
+class BlogPostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'created', 'modified',)

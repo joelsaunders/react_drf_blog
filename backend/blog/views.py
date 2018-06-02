@@ -29,3 +29,8 @@ class BlogPostViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.BlogPostSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_backends = (DjangoFilterBackend,)
+    lookup_field = 'slug'
+
+    def get_queryset(self):
+        queryset = super(BlogPostViewSet, self).get_queryset()
+        return queryset.filter(published=True)
