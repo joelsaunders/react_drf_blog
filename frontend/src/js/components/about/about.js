@@ -5,7 +5,7 @@ export default () => {
         <div>
             <div className="about-biocard generic-card">
                 <div className="about-biopicture">
-                    <img src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494177669/joelpic1_gobweb.jpg" className="post-picture" />
+                    <img src="https://res.cloudinary.com/dceeo2a79/image/upload/v1494177669/joelpic1_gobweb.jpg" className="post-picture" />
                 </div>
                 <div className="about-biotext">
                     <h3>A little bit about me...</h3>
@@ -92,7 +92,7 @@ export default () => {
             </div>
             <div className="about-interests-card generic-card">
                 <div className="image-text">
-                    <img src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494276668/1010213_10151852586077051_988562173_n_qf96ts.jpg" className="about-interestspicture" className="image-text-image" />
+                    <img src="https://res.cloudinary.com/dceeo2a79/image/upload/v1494276668/1010213_10151852586077051_988562173_n_qf96ts.jpg" className="about-interestspicture" className="image-text-image" />
                     <h1 className="image-text-text" >Skiing</h1>           
                 </div>
                 <div className="detail-post-textarea">
@@ -109,7 +109,7 @@ export default () => {
             </div>
             <div className="about-interests-card generic-card">
                 <div className="image-text">
-                    <img src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494280648/IMG_20150102_170923902_vqnvat.jpg" className="about-interestspicture" className="image-text-image" />
+                    <img src="https://res.cloudinary.com/dceeo2a79/image/upload/v1494280648/IMG_20150102_170923902_vqnvat.jpg" className="about-interestspicture" className="image-text-image" />
                     <h1 className="image-text-text" >Seeing stuff</h1>           
                 </div>
                 <div className="detail-post-textarea">

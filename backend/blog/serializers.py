@@ -17,6 +17,8 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class BlogPostSerializer(serializers.HyperlinkedModelSerializer):
+    created = serializers.DateTimeField(format='%d %b %Y')
+
     class Meta:
         model = models.BlogPost
         fields = ('id', 'title', 'body', 'author', 'picture', 'created', 'description', 'slug')

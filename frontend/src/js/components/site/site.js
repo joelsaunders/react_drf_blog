@@ -10,8 +10,8 @@ export default () => {
                 </div>
                 <div className="site-card-table">
                     <div className="site-card-table-row">
-                        <img className="logo-image" src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494690199/react_wj17oq.png" />
-                        <img className="logo-image" src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494690446/redux_qdkw3r.png" />
+                        <img className="logo-image" src="https://res.cloudinary.com/dceeo2a79/image/upload/v1494690199/react_wj17oq.png" />
+                        <img className="logo-image" src="https://res.cloudinary.com/dceeo2a79/image/upload/v1494690446/redux_qdkw3r.png" />
                     </div>
                 </div>
             </div>
@@ -23,10 +23,10 @@ export default () => {
                 </div>
                 <div className="site-card-table">
                     <div className="site-card-table-row">
-                        <img className="logo-image" src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494692329/python_h4igko.png" />
-                        <img className="logo-image" src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494692338/django_mzx2bo.png" />
-                        <img className="logo-image-wide" src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494692334/drf_iz3imi.png" />
-                        <img className="logo-image" src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494693562/postgres_ag5n0i.png" />
+                        <img className="logo-image" src="https://res.cloudinary.com/dceeo2a79/image/upload/v1494692329/python_h4igko.png" />
+                        <img className="logo-image" src="https://res.cloudinary.com/dceeo2a79/image/upload/v1494692338/django_mzx2bo.png" />
+                        <img className="logo-image-wide" src="https://res.cloudinary.com/dceeo2a79/image/upload/v1494692334/drf_iz3imi.png" />
+                        <img className="logo-image" src="https://res.cloudinary.com/dceeo2a79/image/upload/v1494693562/postgres_ag5n0i.png" />
                     </div>
                 </div>
             </div>
@@ -38,17 +38,13 @@ export default () => {
                 </div>
                 <div className="site-card-table">
                     <div className="site-card-table-row">
-                        <img className="logo-image" src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494693336/docker_sjmwgg.png" />
-                        <img className="logo-image" src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494693338/kubernetes_wpb3zp.png" />
-                        <img className="logo-image" src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494693343/circle_dr2rlo.png" />
-                        <img className="logo-image-wider" src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494693566/nginx_k6wmri.png" />
+                        <img className="logo-image" src="https://res.cloudinary.com/dceeo2a79/image/upload/v1494693336/docker_sjmwgg.png" />
+                        <img className="logo-image" src="https://res.cloudinary.com/dceeo2a79/image/upload/v1494693338/kubernetes_wpb3zp.png" />
+                        <img className="logo-image" src="https://res.cloudinary.com/dceeo2a79/image/upload/v1494693343/circle_dr2rlo.png" />
+                        <img className="logo-image-wider" src="https://res.cloudinary.com/dceeo2a79/image/upload/v1494693566/nginx_k6wmri.png" />
                     </div>
                 </div>
             </div>
-
-            {/*<img src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494194646/dodiemiroconstruction1_j97ppq.gif" />
-            <img src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494194581/Atlantis8044constructionheavy_ibiija.gif" />
-            <img src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494195241/vovooo13gifSupercompressed_koala-construct3_a9uywt.gif" />*/}
         </div>
     );
 }

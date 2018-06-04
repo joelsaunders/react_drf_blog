@@ -39,7 +39,7 @@ class Header extends Component {
                     <a id="two" href="#" className="menu-expand-icon" onClick={this.handleNavClick}><img src="/src/style/expand-button.png" /></a>
                     <img
                     className="menu-background"
-                    src="http://res.cloudinary.com/dceeo2a79/image/upload/v1494168814/400a9c97-21cf-4ecd-9339-b036c29e8790_1_l8hfcw.png" />
+                    src="https://res.cloudinary.com/dceeo2a79/image/upload/v1494168814/400a9c97-21cf-4ecd-9339-b036c29e8790_1_l8hfcw.png" />
                     <div className={(this.state.menuIsOpen ? "visible " : "") + "menu-item-container"}>
                         {this.renderMenu()}
                     </div>                   
