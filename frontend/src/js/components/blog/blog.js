@@ -27,6 +27,7 @@ class BlogIndex extends Component {
                                         <div className="post-textarea">
                                             <h4><Link to={`/blog/${post.slug}`}>{post.title}</Link></h4>
                                             <h6>{post.created}</h6>
+                                            <br/>
                                             <p className="post-text">{post.description}</p>
                                         </div>
                                     </li>
