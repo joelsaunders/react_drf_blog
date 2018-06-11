@@ -1,24 +1,31 @@
-from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 
 from blog import models
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class DynamicFieldsSerializer(serializers.ModelSerializer):
+    def __init__(self, *args, **kwargs):
+        fields = kwargs.pop('fields', set())
+
+        super().__init__(*args, **kwargs)
+
+        if fields and '__all__' not in fields:
+            all_fields = set(self.fields.keys())
+            for not_requested in all_fields - set(fields):
+                self.fields.pop(not_requested)
+
+
+class TagSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ('url', 'username', 'email', 'groups')
+        model = models.Tag
+        fields = ('name',)
 
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ('url', 'name')
-
-
-class BlogPostSerializer(serializers.HyperlinkedModelSerializer):
+class BlogPostSerializer(DynamicFieldsSerializer):
     created = serializers.DateTimeField(format='%d %b %Y')
+    tags = TagSerializer(many=True, read_only=True)
+    author = serializers.CharField(source='author.username')
 
     class Meta:
         model = models.BlogPost
-        fields = ('id', 'title', 'body', 'author', 'picture', 'created', 'description', 'slug')
+        exclude = ('id',)
