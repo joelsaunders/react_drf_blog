@@ -4,10 +4,11 @@ services:
     image: redis:4-alpine
     restart: always
     volumes:
-      - "./redis.conf:/usr/local/etc/redis/redis.conf"
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
       - "redis:/data"
     ports:
       - "6019:6379"
+    command: redis-server /usr/local/etc/redis/redis.conf
 
 
 volumes:
