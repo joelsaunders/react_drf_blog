@@ -16,6 +16,7 @@ export default (
         <Route path="" component={ MainPage } >
             <Route path="/" component= { BlogIndex } />
             <Route path="blog" component={ BlogIndex } />
+            <Route path="blog/tags/:tags__name" component={ BlogIndex } />
             <Route path="blog/:id" component={ PostDetail } />
             <Route path="about" component={ AboutMe } />
             <Route path="site" component={ Site } />

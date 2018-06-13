@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPost } from '../../actions/index';
 import { Link } from 'react-router';
+
+import { fetchPost } from '../../actions/index';
 import { parseMarkdown } from '../../utils/markdownParser'
+import PostTags from './tags';
+
 
 class PostDetail extends Component {
     componentWillMount() {
@@ -10,7 +13,7 @@ class PostDetail extends Component {
     }
 
     render() {
-        if (!this.props.post) {
+        if (!Object.keys(this.props.post).length) {
             return <div>Loading.....</div>;
         }
         return (
@@ -19,6 +22,7 @@ class PostDetail extends Component {
                     <div className="detail-post-textarea">
                         <h3>{this.props.post.title}</h3>
                         <h4>{this.props.post.created}</h4>
+                        <PostTags tags={this.props.post.tags} />
                         <div dangerouslySetInnerHTML={parseMarkdown(String(this.props.post.body))}/>
                     </div>
                 </div>

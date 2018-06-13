@@ -9,6 +9,11 @@ LOGGING = {
             'datefmt': '%d/%b/%Y %H:%M:%S',
         },
     },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        }
+    },
     'handlers': {
         'log_to_stdout': {
             'level': 'DEBUG',
@@ -16,12 +21,21 @@ LOGGING = {
             'stream': sys.stdout,
             'formatter': 'main',
         },
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        }
     },
     'loggers': {
         'main': {
             'handlers': ['log_to_stdout'],
             'level': 'DEBUG',
             'propagate': True,
+        },
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
         }
     }
 }

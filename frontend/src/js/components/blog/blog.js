@@ -3,11 +3,18 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router';
 
 import { fetchPosts } from '../../actions/index';
+import PostTags from './tags';
 
 
 class BlogIndex extends Component {
     componentDidMount() {
-        this.props.fetchPosts();
+        this.props.fetchPosts(this.props.params);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.params !== prevProps.params) {
+            this.props.fetchPosts(this.props.params)
+        }
     }
 
     render () {
@@ -26,12 +33,11 @@ class BlogIndex extends Component {
                                         </div>
                                         <div className="post-textarea">
                                             <h4><Link to={`/blog/${post.slug}`}>{post.title}</Link></h4>
+                                            <PostTags tags={post.tags} />
                                             <h6>{post.created}</h6>
-                                            <br/>
                                             <p className="post-text">{post.description}</p>
                                         </div>
                                     </li>
-                                    {/*<div className="post-border" > </div>*/}
                                 </div>
                             );
                         })

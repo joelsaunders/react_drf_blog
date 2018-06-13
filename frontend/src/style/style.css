@@ -2,6 +2,10 @@
     height: 100% !important;
 }
 
+tr {
+    border-bottom-width: 0px;
+}
+
 a {
   color: inherit !important;
   text-decoration: none;
@@ -296,8 +300,20 @@ body {
   overflow: hidden;
 }
 
+.post-tags {
+    flex-direction: row;
+    display: flex;
+}
+
+.post-tags-tag {
+    margin-right: 10px;
+    margin-left: 0px !important;
+    margin-bottom: 5px;
+}
+
 .post-text {
-  overflow: hidden;
+    overflow: hidden;
+    margin-top: 20px;
 }
 
 .post-picture {

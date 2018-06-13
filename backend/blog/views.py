@@ -1,5 +1,5 @@
 
-from django_filters.rest_framework import DjangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend, FilterSet
 from rest_framework import viewsets
 from rest_framework import permissions
 
@@ -67,9 +67,17 @@ class DynamicFieldsViewSet(viewsets.ModelViewSet, metaclass=DynamicFieldsMeta):
         return super().get_serializer(*args, fields=self.custom_query_fields, **kwargs)
 
 
+class BlogPostFilterSet(FilterSet):
+
+    class Meta:
+        model = models.BlogPost
+        fields = ('tags__name',)
+
+
 class BlogPostViewSet(DynamicFieldsViewSet):
     queryset = models.BlogPost.objects.all().order_by('-created')
     serializer_class = serializers.BlogPostSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_backends = (DjangoFilterBackend,)
     lookup_field = 'slug'
+    filter_class = BlogPostFilterSet

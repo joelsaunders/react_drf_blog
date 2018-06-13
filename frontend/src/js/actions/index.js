@@ -23,9 +23,9 @@ export function selectView(view) {
     };
 }
 
-export function fetchPosts() {
+export function fetchPosts(params) {
     const url = generateUrl('posts');
-    const request = axios.get(url);
+    const request = axios.get(url, {params: params});
 
     return {
         type: FETCH_POSTS,
