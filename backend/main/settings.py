@@ -11,6 +11,7 @@ from .components.templates import *
 from .components.logging import *
 from .components.i18n import *
 from .components.rest_framework import *
+from .components.cache import *
 
 
 DEPLOYED = os.getenv('DEPLOYED', False)
