@@ -27,7 +27,7 @@ class BlogPost(AutoTimestamp):
     """
     Post model for blog section of website
     """
-    slug = models.SlugField(max_length=50, db_index=True, default=uuid.uuid4)
+    slug = models.SlugField(max_length=50, default=uuid.uuid4, unique=True)
     title = models.CharField(max_length=100)
     body = models.TextField()
     author = models.ForeignKey(User, on_delete=models.PROTECT)

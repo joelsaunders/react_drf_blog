@@ -1,9 +1,15 @@
+import json
+import zlib
+from distutils.util import strtobool
 
+from django.core.cache import caches
 from django_filters.rest_framework import DjangoFilterBackend, FilterSet
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework import permissions
+from rest_framework.response import Response
 
 from blog import serializers, models
+from blog.signals import cache_post_instance, cache_all_posts
 
 
 def find_relations(model):
@@ -81,3 +87,70 @@ class BlogPostViewSet(DynamicFieldsViewSet):
     filter_backends = (DjangoFilterBackend,)
     lookup_field = 'slug'
     filter_class = BlogPostFilterSet
+
+    @staticmethod
+    def get_cached_object(lookup, cache_name, decompress=True):
+        cached_object = caches[cache_name].get(lookup)
+
+        if cached_object and decompress:
+            return json.loads(zlib.decompress(cached_object), encoding='utf-8')
+        return cached_object
+
+    def get_queryset(self):
+        queryset = super(BlogPostViewSet, self).get_queryset().filter(published=True)
+        cache_all_posts(queryset)
+        return queryset
+
+    def get_object(self):
+        instance = super(BlogPostViewSet, self).get_object()
+        cache_post_instance(instance)
+        cache_all_posts()
+        return instance
+
+    @staticmethod
+    def pop_fields(post, query_fields):
+        pruned_dict = {}
+
+        for field, value in post.items():
+            if field in query_fields:
+                pruned_dict[field] = value
+
+        return pruned_dict
+
+    def retrieve(self, request, *args, **kwargs):
+
+        if strtobool(request.query_params.get('use_cache', 'false')):
+
+            cached_post = self.get_cached_object(
+                self.kwargs[self.lookup_field],
+                cache_name='blog_posts'
+            )
+
+            if cached_post:
+                query_fields = self.get_query_fields()
+                if query_fields:
+                    cached_post = self.pop_fields(cached_post, query_fields)
+                return Response(cached_post, status=status.HTTP_200_OK)
+
+        return super().retrieve(request, *args, **kwargs)
+
+    def list(self, request, *args, **kwargs):
+
+        if strtobool(self.request.query_params.get('use_cache', 'false')):
+            cached_posts = self.get_cached_object('__all__', cache_name='blog_posts_all')
+
+            if cached_posts:
+                query_fields = self.get_query_fields()
+
+                if query_fields:
+                    new_cached_posts = []
+
+                    for post in cached_posts:
+                        new_post = self.pop_fields(post, query_fields)
+                        new_cached_posts.append(new_post)
+
+                    cached_posts = {'results': new_cached_posts}
+
+                return Response(cached_posts, status=status.HTTP_200_OK)
+
+        return super(BlogPostViewSet, self).list(request, *args, **kwargs)

@@ -25,6 +25,8 @@ export function selectView(view) {
 
 export function fetchPosts(params) {
     const url = generateUrl('posts');
+    params['fields'] = ['slug', 'title', 'author', 'picture', 'description', 'tags'].join(',');
+    params['use_cache'] = true;
     const request = axios.get(url, {params: params});
 
     return {
@@ -35,7 +37,8 @@ export function fetchPosts(params) {
 
 export function fetchPost(postId) {
     const url = generateUrl(`posts/${postId}`);
-    const request = axios.get(url);
+    const params = {'use_cache': true};
+    const request = axios.get(url, params);
 
     return {
         type: FETCH_POST,
