@@ -21,7 +21,7 @@ def cache_post_instance(instance):
 
 
 def cache_all_posts(queryset=None):
-    queryset = BlogPost.objects.filter(published=True) if queryset is None else queryset
+    queryset = BlogPost.objects.filter(published=True).order_by('-created') if queryset is None else queryset
     serialized_all = BlogPostSerializer(queryset, many=True).data
     cache_object(serialized_all, 'blog_posts_all', '__all__')
 
