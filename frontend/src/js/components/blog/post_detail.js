@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { Helmet } from "react-helmet";
+
 
 import { fetchPost } from '../../actions/index';
 import { parseMarkdown } from '../../utils/markdownParser'
@@ -18,6 +20,11 @@ class PostDetail extends Component {
         }
         return (
             <div>
+                <Helmet>
+                    <title>{this.props.post.title}</title>
+                    <meta name="description" content={this.props.post.description} />
+                    <meta name="robots" content="index,follow" />
+                </Helmet>
                 <div className="detail-post-container generic-card">
                     <div className="detail-post-textarea">
                         <h3>{this.props.post.title}</h3>

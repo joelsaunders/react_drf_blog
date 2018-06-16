@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router';
+import { Helmet } from "react-helmet";
 
 import { fetchPosts } from '../../actions/index';
 import PostTags from './tags';
@@ -20,6 +21,11 @@ class BlogIndex extends Component {
     render () {
         return (
             <div>
+                <Helmet>
+                    <title>Joel Saunders Blog</title>
+                    <meta name="description" content="Programming related blog focusing on Python and Javascript" />
+                    <meta name="robots" content="index,follow" />
+                </Helmet>
                 <ul className="post-container">
                     {
                         this.props.posts.map(post => {
