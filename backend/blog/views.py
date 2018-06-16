@@ -9,7 +9,7 @@ from rest_framework import permissions
 from rest_framework.response import Response
 
 from blog import serializers, models
-from blog.signals import cache_post_instance, cache_all_posts
+from blog.signals import cache_instance
 
 
 def find_relations(model):
@@ -55,9 +55,12 @@ class DynamicFieldsViewSet(viewsets.ModelViewSet, metaclass=DynamicFieldsMeta):
 
         return custom_query_fields
 
-    def get_queryset(self):
+    def get_queryset(self, no_dynamic_prefetch=False):
         queryset = self.queryset
         self.custom_query_fields.update(self.get_query_fields())
+
+        if no_dynamic_prefetch:
+            return queryset.all()
 
         if '__all__' not in self.custom_query_fields:
             select_related = self.select_related_fields & self.custom_query_fields
@@ -96,19 +99,24 @@ class BlogPostViewSet(DynamicFieldsViewSet):
             return json.loads(zlib.decompress(cached_object), encoding='utf-8')
         return cached_object
 
-    def get_queryset(self):
-        queryset = super(BlogPostViewSet, self).get_queryset().filter(published=True)
-        cache_all_posts(queryset)
-        return queryset
+    def get_queryset(self, no_dynamic_prefetch=False):
+        return super(BlogPostViewSet, self).get_queryset(no_dynamic_prefetch).filter(published=True)
 
     def get_object(self):
         instance = super(BlogPostViewSet, self).get_object()
-        cache_post_instance(instance)
-        cache_all_posts()
+        cache_instance(
+            instance=instance,
+            serializer=self.get_serializer_class(),
+            serializer_params={'fields': '__all__'},
+            cache_name='blog_posts'
+        )
         return instance
 
     @staticmethod
     def pop_fields(post, query_fields):
+        if '__all__' in query_fields:
+            return post
+
         pruned_dict = {}
 
         for field, value in post.items():
@@ -135,22 +143,39 @@ class BlogPostViewSet(DynamicFieldsViewSet):
         return super().retrieve(request, *args, **kwargs)
 
     def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset(no_dynamic_prefetch=True))
+        page = self.paginate_queryset(queryset.values_list(self.lookup_field, flat=True))
+        query_fields = self.get_query_fields()
 
-        if strtobool(self.request.query_params.get('use_cache', 'false')):
-            cached_posts = self.get_cached_object('__all__', cache_name='blog_posts_all')
+        if page is not None:
+            results = []
+            cache_misses = []
 
-            if cached_posts:
-                query_fields = self.get_query_fields()
+            for index, lookup_value in enumerate(page):
+                cached_result = self.get_cached_object(lookup_value, cache_name='blog_posts')
 
-                if query_fields:
-                    new_cached_posts = []
+                if cached_result:
+                    cached_result = self.pop_fields(cached_result, query_fields)
 
-                    for post in cached_posts:
-                        new_post = self.pop_fields(post, query_fields)
-                        new_cached_posts.append(new_post)
+                elif cached_result is None:
+                    cache_misses.append((index, lookup_value))
 
-                    cached_posts = {'results': new_cached_posts}
+                results.append(cached_result)
 
-                return Response(cached_posts, status=status.HTTP_200_OK)
+                filter_kwargs = {
+                    f'{self.lookup_field}__in': [value for _, value in cache_misses]
+                }
 
-        return super(BlogPostViewSet, self).list(request, *args, **kwargs)
+                for cache_miss, instance in zip(cache_misses, self.get_queryset().filter(**filter_kwargs)):
+                    serialized_instance = cache_instance(
+                        instance=instance,
+                        serializer=self.get_serializer_class(),
+                        serializer_params={'fields': '__all__'},
+                        cache_name='blog_posts'
+                    )
+                    results[cache_miss[0]] = self.pop_fields(serialized_instance, query_fields)
+
+            return self.get_paginated_response(results)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
