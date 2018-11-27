@@ -22,6 +22,7 @@ if DEPLOYED:
 else:
     from .components.local.database import *
     from .components.local.rest_framework import *
+    DEBUG = True
 
 try:
     from .local_settings import *
