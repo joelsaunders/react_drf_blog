@@ -40,11 +40,11 @@ router.register('posts', views.BlogPostViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
-    path('admin/', admin.site.urls),
     path(
-        'sitemap.xml',
+        'admin/sitemap.xml',
         sitemap,
         {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'
-    )
+    ),
+    path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
