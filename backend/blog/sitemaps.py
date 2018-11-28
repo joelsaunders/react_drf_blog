@@ -5,7 +5,7 @@ from .models import BlogPost
 
 class StaticViewSiteMap(sitemaps.Sitemap):
     def items(self):
-        return ['about', 'site', 'team', 'contact']
+        return ['blog', 'about', 'site', 'team', 'contact']
 
     def location(self, item):
         return f'/{item}/'
