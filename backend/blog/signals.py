@@ -1,6 +1,7 @@
 import json
 import zlib
 
+from django.contrib.postgres.search import SearchVector
 from django.core.cache import caches
 from django.db.models.signals import post_save, m2m_changed
 from django.db.models.signals import post_delete
@@ -12,10 +13,14 @@ from blog.serializers import BlogPostSerializer
 
 def cache_object(obj, cache_name, cache_key):
     compressed_all = zlib.compress(json.dumps(obj, separators=(',', ':')).encode('utf-8'), 9)
+    print(cache_key)
+    print(type(cache_key))
     caches[cache_name].set(cache_key, compressed_all, timeout=None)
 
 
 def cache_instance(instance, serializer, serializer_params, cache_name):
+    print(instance.slug)
+    print(type(instance.slug))
     serialized_object = serializer(instance=instance, **serializer_params).data
     cache_object(serialized_object, cache_name, instance.slug)
     return serialized_object
@@ -49,3 +54,8 @@ def cache_serialized_post(sender, instance, **kwargs):
 @receiver(post_delete, sender=BlogPost)
 def delete_cached_post(sender, instance, **kwargs):
     caches['blog_posts'].delete(instance.slug)
+
+
+@receiver(post_save, sender=BlogPost)
+def update_search_vector(sender, instance, **kwargs):
+    BlogPost.objects.filter(pk=instance.pk).update(search=SearchVector('title'))
