@@ -17,4 +17,4 @@ class BlogSitemap(sitemaps.Sitemap):
         return BlogPost.objects.filter(published=True)
 
     def location(self, item):
-        return f'/{item.slug}/'
+        return f'/{item.slug}'
