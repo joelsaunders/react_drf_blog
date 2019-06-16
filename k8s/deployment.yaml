@@ -4,6 +4,7 @@ metadata:
   name: thebookofjoel
   namespace: thebookofjoel
 spec:
+  revisionHistoryLimit: 1
   template:
     metadata:
       labels:
