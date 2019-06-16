@@ -12,4 +12,4 @@ COPY . /code/
 RUN apk add --update bash && rm -rf /var/cache/apk/*
 RUN python manage.py collectstatic --noinput
 EXPOSE 8000
-CMD ["gunicorn", "main.wsgi:application", "--bind 0.0.0.0:8000"]
+CMD ["gunicorn", "main.wsgi:application", "-b 0.0.0.0:8000"]

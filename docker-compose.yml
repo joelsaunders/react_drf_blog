@@ -1,24 +1,39 @@
-version: "2"
+version: '2'
 services:
-  redis:
-    image: redis:4-alpine
-    restart: always
+  postgres:
+    image: postgres:alpine
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: blog_user
+      POSTGRES_DB: blog
+  web:
+    build: ./backend
+    command: bash -c "gunicorn main.wsgi:application -w 3 -b 0.0.0.0:8000"
     volumes:
-      - ./redis.conf:/usr/local/etc/redis/redis.conf
-      - "redis:/data"
+      - ./backend:/code
     ports:
-      - "6019:6379"
-    command: redis-server /usr/local/etc/redis/redis.conf
-
-
-volumes:
-  redis: {}
-
-
-networks:
-  default:
-    driver: bridge
-    ipam:
-     config:
-       - subnet: 172.25.0.0/24
-         gateway: 172.25.0.1
+      - "8000:8000"
+    expose:
+      - "8000"
+    depends_on:
+      - postgres
+#  frontend:
+#    build: ./frontend
+#    ports:
+#      - "80:8000"
+#    volumes:
+#      - ./frontend/:/code/
+#    depends_on:
+#      - web
+#    links:
+#      - "web"
+#    command: >
+#        sh -c '
+#        if test -d node_modules;
+#        then
+#            echo node_modules_exists ;
+#        else
+#            cp -a /tmp/node_modules /code/;
+#        fi &&
+#        npm install && npm start
+#        '
