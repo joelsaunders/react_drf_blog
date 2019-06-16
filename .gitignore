@@ -20,3 +20,4 @@ app/static
 backend/main/static
 
 frontend/dist
+nginx/www
