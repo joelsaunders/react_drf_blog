@@ -22,7 +22,7 @@ echo "$FRONTEND_TAG"
 
 echo "building backend image"
 docker build -t $BACKEND_TAG -q ./backend
-export id=$(sudo docker run -d $BACKEND_TAG)
+export id=$(docker run -d $BACKEND_TAG)
 mkdir -p nginx/www/static
 docker cp $id:/code/main/static nginx/www/
 # sudo mv nginx/www/staticfiles nginx/www/static
@@ -42,5 +42,5 @@ if [ "$1" == "deploy" ]; then
     echo "adding tags to kubectl"
     sed -i "s#image: backend#image: ${BACKEND_TAG}#" ./k8s/deployment.yaml
     sed -i "s#image: nginx#image: ${NGINX_TAG}#" ./k8s/deployment.yaml
-    kubectl apply -Rf .
+    kubectl apply -Rf ./k8s
 fi

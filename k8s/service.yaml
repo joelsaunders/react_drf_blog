@@ -10,7 +10,7 @@ spec:
       protocol: TCP
       targetPort: 80
   selector:
-    name: thebookofjoel
+    name: thebookofjoel-main
 ---
 apiVersion: v1
 kind: Service
@@ -24,4 +24,4 @@ spec:
       protocol: TCP
       targetPort: 8000
   selector:
-    name: thebookofjoel
+    name: thebookofjoel-main
