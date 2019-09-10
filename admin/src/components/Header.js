@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import LoginForm from "./LoginForm";
 import {connect} from "react-redux";
 import {signOut} from "../actions";
+import {Link} from "react-router-dom";
 
 const Header = (props) => {
     const[logInOpen, setLoginOpen] = useState(false);
@@ -39,7 +40,7 @@ const Header = (props) => {
     };
 
     return <div className="ui header">
-        Blog Admin
+        <Link to="/">Blog Admin</Link>
         {renderLogButton()}
         {logInOpen? renderLoginModal() : null}
     </div>;

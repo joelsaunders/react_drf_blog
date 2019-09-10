@@ -32,7 +32,7 @@ const LoginForm = (props) => {
             onSubmit={(values, actions) => handleSubmit(values, actions)}
         >
             { props => {
-                const { status, errors, touched, isSubmitting} = props;
+                const { status, isSubmitting} = props;
 
                 return (
                     <Form className="ui form">

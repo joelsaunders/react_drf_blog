@@ -1,10 +1,13 @@
 import React from 'react';
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
-const renderPostButtons = () => {
+const renderPostButtons = (post) => {
     return <div className="extra content">
         <div className="ui two buttons">
-            <button className="ui basic green button">Edit Post</button>
+            <Link className="ui basic green button" to={`/posts/edit/${post.slug}`} >
+                Edit Post
+            </Link>
             <button className="ui basic red button">Delete Post</button>
         </div>
     </div>
@@ -27,7 +30,7 @@ const PostItem = (props) => {
                 {props.post.description}
             </div>
         </div>
-        {props.currentUser === props.post.author ? renderPostButtons(): null}
+        {props.currentUser === props.post.author ? renderPostButtons(props.post): null}
     </div>
 };
 
