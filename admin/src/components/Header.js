@@ -30,7 +30,6 @@ const Header = (props) => {
                 Log Out
             </button>;
         }
-
     };
 
     const renderLoginModal = () => {

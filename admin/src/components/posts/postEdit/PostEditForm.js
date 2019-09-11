@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import {Redirect, Route, Switch} from "react-router-dom";
 import PageOne from "./PageOne";
 import PageTwo from "./PageTwo";
+import customHistory from "../../../customHistory";
 
 const PostEditForm = (props) => {
     return <div className="ui form">
@@ -34,11 +35,11 @@ const FormikPostEditForm = withFormik({
         title: Yup.string().max(50, 'Must be less than 100 characters').required('Required')
     }),
     enableReinitialize: true,
-    handleSubmit: (values, {setSubmitting}) => {
-        setTimeout(() => {
-            console.log(values);
-            setSubmitting(false);
-        }, 1000);
+    handleSubmit: (values, {setSubmitting, props}) => {
+        console.log(props);
+        props.editPostAction(props.post.slug, values);
+        setSubmitting(false);
+        customHistory.push("/")
     }
 });
 

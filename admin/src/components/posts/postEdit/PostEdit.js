@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {fetchPost} from "../../../actions";
+import {editPost, fetchPost} from "../../../actions";
 import {connect} from "react-redux";
 import FormikPostEditForm from "./PostEditForm";
 
@@ -24,7 +24,11 @@ const PostEdit = (props) => {
                 Edit post: {props.currentPost.title}
             </div>
         </h3>
-        <FormikPostEditForm post={props.currentPost} match={props.match} />
+        <FormikPostEditForm
+            editPostAction={props.editPost}
+            post={props.currentPost}
+            match={props.match}
+        />
     </div>;
 };
 
@@ -32,4 +36,4 @@ const mapStateToProps = (state) => {
     return {currentPost: state.currentPost}
 };
 
-export default connect(mapStateToProps, {fetchPost})(PostEdit);
+export default connect(mapStateToProps, {fetchPost, editPost})(PostEdit);

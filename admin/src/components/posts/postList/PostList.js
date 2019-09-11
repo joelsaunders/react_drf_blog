@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {connect} from "react-redux";
-import {fetchPosts} from "../../actions";
+import {fetchPosts} from "../../../actions";
 import PostItem from "./PostListItem";
 
 const PostList = ({fetchPosts, posts}) => {
