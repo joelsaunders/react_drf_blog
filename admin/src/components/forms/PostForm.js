@@ -38,15 +38,11 @@ const PostForm = (props) => {
 
 const FormikPostForm = withFormik({
     mapPropsToValues: (props) => {
-        if (!props.post) {
-            return {
-                title: '',
-                description: ''
-            }
-        }
         return {
-            title: props.post.title,
-            description: props.post.description
+            title: props.post? props.post.title || '': '',
+            description: props.post? props.post.description || '': '',
+            body: props.post? props.post.body || '': '',
+            picture: props.post? props.post.picture || '': ''
         }
     },
     validationSchema: Yup.object().shape({

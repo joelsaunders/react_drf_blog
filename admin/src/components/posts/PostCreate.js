@@ -1,5 +1,7 @@
 import React from 'react';
 import FormikPostForm from "../forms/PostForm";
+import {createPost} from "../../actions";
+import {connect} from "react-redux";
 
 const PostCreate = (props) => {
 
@@ -11,14 +13,10 @@ const PostCreate = (props) => {
             </div>
         </h3>
         <FormikPostForm
-            submitAction={(payload) => {
-                const pay = {...payload, ['body']: 'A', ['author']: 'joel', ['picture']: 'a'};
-                console.log(pay)
-            }}
-            editPostAction={props.editPost}
+            submitAction={props.createPost}
             match={props.match}
         />
     </div>;
 };
 
-export default PostCreate;
+export default connect(null, {createPost})(PostCreate);
