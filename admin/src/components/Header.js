@@ -38,9 +38,17 @@ const Header = (props) => {
         </Modal>
     };
 
-    return <div className="ui header">
-        <Link to="/">Blog Admin</Link>
-        {renderLogButton()}
+    return <div className="ui menu">
+        <Link to="/">
+            <div className="item">
+                <h2>Blog Admin</h2>
+            </div>
+        </Link>
+        <div className="right menu">
+            <div className="item">
+            {renderLogButton()}
+            </div>
+        </div>
         {logInOpen? renderLoginModal() : null}
     </div>;
 };

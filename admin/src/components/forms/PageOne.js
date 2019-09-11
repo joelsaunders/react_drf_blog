@@ -13,7 +13,7 @@ const PageOne = (props) => {
         <div className={`ui error message ${err ? 'visible': null}`}>
             <ErrorMessage className="ui error message visible" name="title" />
         </div>
-        <Link to={`/posts/edit/${props.match.params.slug}/page-two`}>
+        <Link to={`${props.rootURL}/page-two`}>
             <div className="ui submit button">
                 Next Page
             </div>
