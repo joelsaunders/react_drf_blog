@@ -41,7 +41,7 @@ export const createPost = (data) => async (dispatch, getState) => {
     try {
         const response = await theBookOfJoel.post(
             `/api/posts/`,
-            {...data, ['author']: user, ['published']: true},
+            {...data, ...{author: user, published: true}},
             {headers: {Authorization: `Token ${token}`}}
         );
         dispatch({type: CREATE_POST, payload: response.data})
