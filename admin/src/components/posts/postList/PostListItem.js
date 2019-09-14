@@ -41,11 +41,15 @@ const PostItem = (props) => {
     const [deleteModalActive, setDeleteModalActive] = useState(false);
 
     return <div className="w-full rounded overflow-hidden shadow-lg my-6 flex flex-col md:flex-row bg-white h-auto relative">
-        <img className="object-cover h-48 md:w-1/3 md:h-auto" src={props.post.picture} alt="post"/>
+        <Link className="h-48 md:w-1/3 md:h-auto" to={`/props/posts/${props.post.slug}`}>
+            <img className="object-cover w-full h-48 md:h-full" src={props.post.picture} alt="post"/>
+        </Link>
         <div className="w-full md:w-2/3 p-5">
-            <h3 className="text-gray-900 font-bold text-xl mb-2">
-                {props.post.title}
-            </h3>
+            <Link to={`/posts/${props.post.slug}`}>
+                <h3 className="text-gray-900 font-bold text-xl mb-2">
+                    {props.post.title}
+                </h3>
+            </Link>
             <p className="text-sm text-gray-600 mb-2">
                 <span>{props.post.created}</span>
             </p>

@@ -9,6 +9,7 @@ import AboutContainer from "./about/AboutContainer";
 import SiteContainer from "./site/SiteContainer";
 import ContactContainer from "./contact/ContactContainer";
 import TeamContainer from "./team/TeamContainer";
+import PostDetailContainer from "./posts/postDetail/PostDetailContainer";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/site" component={SiteContainer}/>
           <Route path="/contact" component={ContactContainer}/>
           <Route path="/team" component={TeamContainer}/>
+          <Route path="/posts/:slug" exact component={PostDetailContainer}/>
         </div>
       </Router>
     </div>

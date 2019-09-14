@@ -11,7 +11,7 @@ export const SIGN_OUT = 'SIGN_OUT';
 export const fetchPosts = () => async dispatch => {
     const response = await theBookOfJoel.get(
         '/api/posts/',
-        {params: {fields: 'slug,title,description,author,picture,created'}}
+        {params: {fields: 'slug,title,description,author,picture,created,tags'}}
     );
     dispatch({type: FETCH_POSTS, payload: response.data.results})
 };
