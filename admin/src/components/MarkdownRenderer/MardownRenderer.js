@@ -2,7 +2,6 @@ import React from 'react';
 import marked from 'marked';
 import hljs from 'highlight.js';
 import renderHTML from 'react-render-html';
-import './markdown.css';
 
 const renderer = new marked.Renderer();
 
