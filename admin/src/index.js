@@ -6,6 +6,7 @@ import thunk from "redux-thunk";
 import App from './components/App';
 import rootReducer from "./reducers";
 import {loadState} from "./localStorage";
+import './css/tailwind.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
