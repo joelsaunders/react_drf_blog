@@ -7,7 +7,7 @@ import PageTwo from "./PageTwo";
 import customHistory from "../../customHistory";
 
 const PostForm = (props) => {
-    return <div className="ui form">
+    return <div>
         <Form>
             <Switch>
             <Redirect from={props.match.path} exact to={`${props.match.path}/page-one`}/>

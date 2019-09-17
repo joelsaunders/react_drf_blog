@@ -4,8 +4,8 @@ import _ from 'lodash';
 
 const HeaderItems = {
     'Blog': '/',
-    'About': '/about',
-    'Site': '/site',
+    // 'About': '/about',
+    // 'Site': '/site',
     'Team': '/team',
     'Contact': '/contact',
 };

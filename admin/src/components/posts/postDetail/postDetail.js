@@ -15,7 +15,6 @@ const PostDetail = ({currentPost}) => {
             <p className="text-sm text-gray-600 mb-2">
                 {currentPost.created}
             </p>
-            {/*<p className="text-gray-700 text-base">*/}
             <MarkdownRenderer text={currentPost.body} />
         </div>
     </div>

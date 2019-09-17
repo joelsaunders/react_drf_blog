@@ -1,9 +1,9 @@
 import React from 'react';
 import {Route, Router} from "react-router-dom";
 import PostList from "./posts/postList/PostList";
-import PostEdit from "./posts/PostEdit";
+import PostEdit from "./posts/postEdit/PostEditContainer";
 import customHistory from "../customHistory";
-import PostCreate from "./posts/PostCreate";
+import PostCreate from "./posts/postCreate/PostCreateContainer";
 import HeaderContainer from "./header/HeaderContainer";
 import AboutContainer from "./about/AboutContainer";
 import SiteContainer from "./site/SiteContainer";
@@ -13,7 +13,7 @@ import PostDetailContainer from "./posts/postDetail/PostDetailContainer";
 
 
 function App() {
-  return <div className="bg-gray-100">
+  return <div className="bg-gray-100 min-h-screen">
       <div className="container mx-auto p-2">
       <Router history={customHistory} >
         <div>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from "react-redux";
 import {signOut} from "../../actions";
 import Header from "./Header";
@@ -24,8 +24,7 @@ const HeaderContainer = (props) => {
         setLoginOpen(false);
     };
 
-    return <div>
-        <Header
+    return <Header
             renderLogInModal={logInOpen}
             handleLogInClick={onLogInClick}
             handleLogOutClick={onLogOutClick}
@@ -33,8 +32,7 @@ const HeaderContainer = (props) => {
             onDismissLogIn={onDismissLogIn}
             onMenuClick={onMenuClick}
             menuOpen={menuOpen}
-        />
-    </div>
+    />
 };
 
 const mapStateToProps = (state) => {
