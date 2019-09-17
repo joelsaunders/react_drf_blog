@@ -17,7 +17,7 @@ function App() {
       <div className="container mx-auto p-2">
       <Router history={customHistory} >
         <div>
-          <HeaderContainer path="/" />
+          <Route path="/" component={HeaderContainer} />
           <Route path="/" exact component={PostList} />
           <Route path="/posts/edit/:slug" component={PostEdit}/>
           <Route path="/posts/create" component={PostCreate}/>

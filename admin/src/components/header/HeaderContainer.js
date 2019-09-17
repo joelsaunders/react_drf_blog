@@ -32,6 +32,7 @@ const HeaderContainer = (props) => {
             onDismissLogIn={onDismissLogIn}
             onMenuClick={onMenuClick}
             menuOpen={menuOpen}
+            currentPath={props.location.pathname}
     />
 };
 

@@ -43,7 +43,7 @@ const Header = (props) => {
             </button>
         </div>
         <div className={`w-full block flex-grow md:flex md:items-center md:w-auto ${menuOpen? null: 'hidden'}`}>
-            <HeaderMenu />
+            <HeaderMenu currentPath={props.currentPath} />
         </div>
         <div className={menuOpen? '': 'hidden md:block'}>
             <LogInButton
