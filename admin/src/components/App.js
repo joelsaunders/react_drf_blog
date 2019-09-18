@@ -14,7 +14,7 @@ import PostDetailContainer from "./posts/postDetail/PostDetailContainer";
 
 function App() {
   return <div className="bg-gray-100 min-h-screen">
-      <div className="container mx-auto p-2">
+      <div className="container mx-auto p-2 max-w-6xl">
       <Router history={customHistory} >
         <div>
           <Route path="/" component={HeaderContainer} />

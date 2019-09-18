@@ -1,8 +1,12 @@
 import React from 'react';
 import TeamTable from "./TeamTable";
+import TeamJoinUs from "./TeamJoinUs";
 
 const TeamContainer = () => {
-    return <TeamTable />
+    return <div>
+        <TeamTable />
+        <TeamJoinUs />
+    </div>
 };
 
 export default TeamContainer;

@@ -46,7 +46,7 @@ const FormikPostForm = withFormik({
         }
     },
     validationSchema: Yup.object().shape({
-        title: Yup.string().max(50, 'Must be less than 100 characters').required('Required')
+        title: Yup.string().max(100, 'Must be less than 100 characters').required('Required')
     }),
     enableReinitialize: true,
     handleSubmit: (values, {setSubmitting, props}) => {
