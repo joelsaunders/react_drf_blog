@@ -9,23 +9,18 @@ export FRONTEND_TAG=$BASE_TAG/thebookofjoel-frontend:$COMMIT
 export BACKEND_TAG=$BASE_TAG/thebookofjoel-backend:$COMMIT
 export NGINX_TAG=$BASE_TAG/thebookofjoel-nginx:$COMMIT
 
-echo "building frontend image"
-docker build -t $FRONTEND_TAG -q ./frontend
+echo "building frontend"
+npm run --prefix ./admin build
 rm -rf nginx/www
-mkdir -p nginx/www/src
-cp -a frontend/src/style nginx/www/src
-cp -a frontend/index.html nginx/www
-cp -a frontend/favicon.ico nginx/www
-docker run --entrypoint cat --rm $FRONTEND_TAG /code/dist/bundle.js > nginx/www/bundle.js
+mkdir -p nginx/www/
+cp -a admin/build/* nginx/www/
 echo "frontend build finished"
-echo "$FRONTEND_TAG"
 
 echo "building backend image"
 docker build -t $BACKEND_TAG -q ./backend
 export id=$(docker run -d $BACKEND_TAG)
 mkdir -p nginx/www/static
-docker cp $id:/code/main/static nginx/www/
-# sudo mv nginx/www/staticfiles nginx/www/static
+docker cp $id:/code/main/static/ nginx/www/
 docker stop $id
 echo "finished building backend image"
 echo "$BACKEND_TAG"
@@ -42,5 +37,5 @@ if [ "$1" == "deploy" ]; then
     echo "adding tags to kubectl"
     sed -i "s#image: backend#image: ${BACKEND_TAG}#" ./k8s/deployment.yaml
     sed -i "s#image: nginx#image: ${NGINX_TAG}#" ./k8s/deployment.yaml
-    kubectl apply -Rf ./k8s
+#    kubectl apply -Rf ./k8s
 fi

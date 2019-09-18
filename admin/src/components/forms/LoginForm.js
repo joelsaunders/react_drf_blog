@@ -9,7 +9,7 @@ const LoginForm = (props) => {
         let response;
         try {
             response = await theBookOfJoel.post(
-                '/api-token-auth/',
+                'api-token-auth/',
                 values
             );
         } catch (e) {

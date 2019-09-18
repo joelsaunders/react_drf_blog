@@ -1,6 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend, FilterSet
 from rest_framework import permissions
 from rest_framework import viewsets
+from rest_framework.authentication import TokenAuthentication
 
 from blog import serializers, models
 
@@ -80,6 +81,7 @@ class BlogPostViewSet(DynamicFieldsViewSet):
     queryset = models.BlogPost.objects.all().order_by('-created')
     serializer_class = serializers.BlogPostSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    authentication_classes = (TokenAuthentication,)
     filter_backends = (DjangoFilterBackend,)
     lookup_field = 'slug'
     filter_class = BlogPostFilterSet

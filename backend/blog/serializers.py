@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from blog import models
@@ -22,10 +23,20 @@ class TagSerializer(serializers.ModelSerializer):
 
 
 class BlogPostSerializer(DynamicFieldsSerializer):
-    created = serializers.DateTimeField(format='%d %b %Y')
+    created = serializers.DateTimeField(format='%d %b %Y', required=False)
     tags = TagSerializer(many=True, read_only=True)
-    author = serializers.CharField(source='author.username')
+    author = serializers.SlugRelatedField(
+        slug_field='username',
+        queryset=User.objects.all()
+    )
 
     class Meta:
         model = models.BlogPost
         exclude = ('id',)
+
+
+class UserSerializer(serializers.ModelSerializer):
+    username = serializers.CharField()
+
+    class Meta:
+        model = User

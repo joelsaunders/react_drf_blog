@@ -20,6 +20,7 @@ from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path
 from rest_framework import routers
+from rest_framework.authtoken.views import obtain_auth_token
 
 from blog import views
 from blog.sitemaps import (
@@ -47,4 +48,5 @@ urlpatterns = [
         name='django.contrib.sitemaps.views.sitemap'
     ),
     path('admin/', admin.site.urls),
+    path('api-token-auth/', obtain_auth_token)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

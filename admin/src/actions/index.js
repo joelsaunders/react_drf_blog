@@ -10,7 +10,7 @@ export const SIGN_OUT = 'SIGN_OUT';
 
 export const fetchPosts = () => async dispatch => {
     const response = await theBookOfJoel.get(
-        '/api/posts/',
+        'api/posts/',
         {params: {fields: 'slug,title,description,author,picture,created,tags'}}
     );
     dispatch({type: FETCH_POSTS, payload: response.data.results})
@@ -40,7 +40,7 @@ export const createPost = (data) => async (dispatch, getState) => {
 
     try {
         const response = await theBookOfJoel.post(
-            `/api/posts/`,
+            `api/posts/`,
             {...data, ...{author: user, published: true}},
             {headers: {Authorization: `Token ${token}`}}
         );

@@ -1,5 +1,6 @@
 
 INSTALLED_APPS = [
+    'corsheaders',
     'flat_responsive',
 
     'django.contrib.admin',
