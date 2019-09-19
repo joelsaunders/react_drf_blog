@@ -10,10 +10,16 @@ import SiteContainer from "./site/SiteContainer";
 import ContactContainer from "./contact/ContactContainer";
 import TeamContainer from "./team/TeamContainer";
 import PostDetailContainer from "./posts/postDetail/PostDetailContainer";
+import {Helmet} from "react-helmet";
 
 
 function App() {
   return <div className="bg-gray-100 min-h-screen">
+      <Helmet>
+        <title>Joel Saunders Inc.</title>
+        <meta name="description" content="Joel Saunders personal blog" />
+        <meta name="robots" content="index,follow" />
+      </Helmet>
       <div className="container mx-auto p-2 max-w-6xl">
       <Router history={customHistory} >
         <div>
@@ -25,7 +31,7 @@ function App() {
           <Route path="/site" component={SiteContainer}/>
           <Route path="/contact" component={ContactContainer}/>
           <Route path="/team" component={TeamContainer}/>
-          <Route path="/posts/:slug" exact component={PostDetailContainer}/>
+          <Route path="/:slug" exact component={PostDetailContainer}/>
         </div>
       </Router>
     </div>

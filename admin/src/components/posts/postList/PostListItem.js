@@ -43,12 +43,12 @@ const PostItem = (props) => {
     const [deleteModalActive, setDeleteModalActive] = useState(false);
 
     return <div className="w-full rounded overflow-hidden shadow-lg my-6 flex flex-col md:flex-row bg-white relative md:h-64">
-        <Link className="md:w-1/3" to={`/posts/${props.post.slug}`}>
+        <Link className="md:w-1/3" to={`/${props.post.slug}`}>
             <img className="object-cover w-full h-64 md:h-full" src={props.post.picture} alt="post"/>
         </Link>
         <div className="w-full md:w-2/3 p-5">
             <h3 className="text-gray-900 font-bold text-xl mb-4">
-                <Link to={`/posts/${props.post.slug}`}>
+                <Link to={`/${props.post.slug}`}>
                     {props.post.title}
                 </Link>
             </h3>
@@ -59,7 +59,7 @@ const PostItem = (props) => {
                 {props.post.description}
             </p>
 
-            <Link to={`/posts/${props.post.slug}`}>
+            <Link to={`/${props.post.slug}`}>
                 <svg viewBox="0 0 24 24" width="24" height="24"
                      stroke="currentColor" strokeWidth="2" fill="none"
                      strokeLinecap="round" strokeLinejoin="round"
