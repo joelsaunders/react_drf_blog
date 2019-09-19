@@ -1,12 +1,12 @@
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
-  name: k3stest-thebookofjoel-com
+  name: www-thebookofjoel-com
   namespace: thebookofjoel
 spec:
-  secretName: k3stest-thebookofjoel-com-tls
+  secretName: www-thebookofjoel-com-tls
   dnsNames:
-  - k3stest.thebookofjoel.com
+  - www.thebookofjoel.com
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
@@ -15,4 +15,4 @@ spec:
       - http01:
           ingress: ingress
         domains:
-          - k3stest.thebookofjoel.com
+          - www.thebookofjoel.com

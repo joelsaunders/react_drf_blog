@@ -8,9 +8,9 @@ metadata:
     traefik.ingress.kubernetes.io/redirect-entry-point: https
 spec:
   tls:
-    - secretName: k3stest-thebookofjoel-com-tls
+    - secretName: www-thebookofjoel-com-tls
   rules:
-  - host: k3stest.thebookofjoel.com
+  - host: www.thebookofjoel.com
     http:
       paths:
         - path: /api
