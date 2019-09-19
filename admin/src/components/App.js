@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Router, Switch} from "react-router-dom";
+import {Redirect, Route, Router, Switch} from "react-router-dom";
 import PostList from "./posts/postList/PostList";
 import PostEdit from "./posts/postEdit/PostEditContainer";
 import customHistory from "../customHistory";
@@ -33,6 +33,7 @@ function App() {
                         <Route path="/contact" component={ContactContainer}/>
                         <Route path="/team" component={TeamContainer}/>
                         <Route path="/:slug" exact component={PostDetailContainer}/>
+                        <Redirect from='/blog/:slug' to='/:slug'/>
                     </Switch>
                 </div>
             </Router>
