@@ -38,37 +38,48 @@ const renderPostButtons = (post, setDeleteModalActive) => {
     </div>
 };
 
+const PostTag = ({tagName}) => {
+    return <div className="mr-2 rounded text-teal-500 text-sm border-teal-500 border px-2 hover:text-teal-100 hover:bg-teal-500">
+        {tagName}
+    </div>
+};
+
 
 const PostItem = (props) => {
     const [deleteModalActive, setDeleteModalActive] = useState(false);
 
-    return <div className="w-full rounded overflow-hidden shadow-lg my-6 flex flex-col md:flex-row bg-white relative md:h-64">
-        <Link className="md:w-1/3" to={`/${props.post.slug}`}>
+    return <div className="w-full rounded overflow-hidden shadow-lg my-4 flex flex-col md:flex-row bg-white relative md:h-full md:justify-end">
+        <Link className="md:w-1/3 md:absolute md:left-0 md:h-full" to={`/${props.post.slug}`}>
             <img className="object-cover w-full h-64 md:h-full" src={props.post.picture} alt="post"/>
         </Link>
-        <div className="w-full md:w-2/3 p-5">
-            <h3 className="text-gray-900 font-bold text-xl mb-4">
+        <div className="w-full md:w-2/3 px-4 pl-4 pb-8">
+            <h3 className="text-gray-900 font-bold text-xl mb-4 mt-4">
                 <Link to={`/${props.post.slug}`}>
                     {props.post.title}
                 </Link>
             </h3>
-            <p className="text-sm text-gray-600 mb-2">
+            <p className="text-sm text-gray-600 mb-4">
                 <span>{props.post.created}</span>
             </p>
+            <div className="flex flex-row mb-4 flex-wrap">
+                {props.post.tags.map(({name}) => {
+                    return <PostTag key={name} tagName={name} />
+                })}
+            </div>
             <p className="text-gray-700 text-base">
                 {props.post.description}
             </p>
 
-            <Link to={`/${props.post.slug}`}>
-                <svg viewBox="0 0 24 24" width="24" height="24"
-                     stroke="currentColor" strokeWidth="2" fill="none"
-                     strokeLinecap="round" strokeLinejoin="round"
-                     className="absolute right-0 bottom-0 mb-6 mr-8 hover:text-teal-500 hidden md:block"
-                >
-                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                </svg>
-            </Link>
+            {/*<Link to={`/${props.post.slug}`}>*/}
+            {/*    <svg viewBox="0 0 24 24" width="24" height="24"*/}
+            {/*         stroke="currentColor" strokeWidth="2" fill="none"*/}
+            {/*         strokeLinecap="round" strokeLinejoin="round"*/}
+            {/*         className="absolute right-0 bottom-0 mb-6 mr-8 hover:text-teal-500 hidden md:block"*/}
+            {/*    >*/}
+            {/*        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>*/}
+            {/*        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>*/}
+            {/*    </svg>*/}
+            {/*</Link>*/}
         </div>
         {props.currentUser === props.post.author ? renderPostButtons(props.post, setDeleteModalActive): null}
         {deleteModalActive? renderDeleteModal(setDeleteModalActive): null}
