@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: backend
+          image: joelsaunders91/thebookofjoel-backend:a203b228d3165e1bc2543427447f6b9a8f4e60d3
           ports:
             - containerPort: 8000
           env:
@@ -36,6 +36,6 @@ spec:
             - name: DB_USER
               value: thebookofjoeluser
         - name: nginx
-          image: nginx
+          image: joelsaunders91/thebookofjoel-nginx:a203b228d3165e1bc2543427447f6b9a8f4e60d3
           ports:
             - containerPort: 80
