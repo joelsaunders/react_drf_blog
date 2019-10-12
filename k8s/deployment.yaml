@@ -33,6 +33,8 @@ spec:
                 secretKeyRef:
                   name: db-password
                   key: db-password
+            - name: DB_USER
+              value: thebookofjoeluser
         - name: nginx
           image: nginx
           ports:
