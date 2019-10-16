@@ -9,7 +9,6 @@ metadata:
     ingress.kubernetes.io/ssl-redirect: "true"
     ingress.kubernetes.io/ssl-temporary-redirect: "true"
     ingress.kubernetes.io/ssl-host: "thebookofjoel.com"
-#    traefik.ingress.kubernetes.io/redirect-entry-point: https
     traefik.ingress.kubernetes.io/redirect-regex: "^https://thebookofjoel.com/(.*)"
     traefik.ingress.kubernetes.io/redirect-replacement: "https://www.thebookofjoel.com/$1"
     traefik.ingress.kubernetes.io/redirect-permanent: "true"
