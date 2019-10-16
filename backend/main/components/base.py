@@ -23,3 +23,12 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 WSGI_APPLICATION = 'main.wsgi.application'
+
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:8000',
+#     'http://localhost:3000',
+    'https://www.thebookofjoel.com',
+    'https://k3stest.thebookofjoel.com',
+]

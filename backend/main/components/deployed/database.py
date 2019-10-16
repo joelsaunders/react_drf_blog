@@ -6,10 +6,10 @@ from distutils.util import strtobool
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ['DB_NAME'],
-        'USER': os.environ['DB_USER'],
+        'NAME': os.getenv('DB_NAME', 'blog'),
+        'USER': os.getenv('DB_USER', 'root'),
         'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'HOST': os.getenv('DB_HOST', '127.0.0.1'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }

@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: thebookofjoel
+  namespace: thebookofjoel
+spec:
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        name: thebookofjoel-main
+    spec:
+      containers:
+        - name: backend
+          image: joelsaunders91/thebookofjoel-backend:a203b228d3165e1bc2543427447f6b9a8f4e60d3
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DEPLOYED
+              value: "True"
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: db-host
+                  key: db-host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: db-port
+                  key: db-port
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-password
+                  key: db-password
+            - name: DB_USER
+              value: thebookofjoeluser
+        - name: nginx
+          image: joelsaunders91/thebookofjoel-nginx:a203b228d3165e1bc2543427447f6b9a8f4e60d3
+          ports:
+            - containerPort: 80
